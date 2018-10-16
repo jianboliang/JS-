@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			html,body{width: 100%;height: 100%;}
+			
+			/*20. css实现垂直居中?
+			方法1
+			.box1{
+				width: 300px;
+				height: 200px;
+				display: table-cell;	/*将元素以单元格的形式展示(自适应布局)
+										特征:
+										1.支持margin:auto;
+										2.默认内容撑开高度
+										3.支持宽高*/
+			/*	vertical-align: middle;/*垂直对齐方式:middle元素的中部对齐,如果有多个元素,都得写middle,是元素高的中部,不是文字的中部.
+										注意:要想横排所有元素都垂直居中,都得加vertical-align:middle;如果有文字需要垂直居中,千万不能给文字元素添加高度.*/
+			/*	text-align: center;/*文本对齐方式：居中*/
+			/*	background: orange;
+			}
+			 /*
+			方法2  
+			.box2{
+				display: flex;
+				justify-content: center;
+				align-content: center;
+			}
+			*/
+			
+			
+			/*方法3
+			.box3{
+				position: relative;
+				width: 200px;
+				height: 200px;
+				background-color: pink;
+			}
+			.box3 span{
+				position: absolute;
+				width: 100px;
+				height: 50px;
+				top: 50%;
+				left: 50%;
+				margin-left: -50px;
+				margin-top: -25px;
+				text-align: center;
+			}
+			*/
+			
+			
+			/*方法4
+			.box4 span{
+				width: 50%;
+				height: 50%;
+				background-color: pink;
+				overflow: auto;
+				margin: auto;
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right:0;
+			}
+			*/
+			/*方法5
+			.box5 span{
+				position:absolute;
+				top: 50%;
+				left: 50%;
+				width: 100%;
+				/*改变：定义2D转换  具体解答网址http://www.runoob.com/cssref/css3-pr-transform.html
+				transform: translate(-50%,-50%);
+				text-align: center;
+			}
+			*/
+			
+			
+			/*方法6
+			.box6{
+				text-align: center;
+				font-size: 0;
+			}
+			.box6 span{
+				vertical-align: middle;
+				display: inline-block;
+				font-size: 16px;
+			}
+			.box6:after{
+				content: '';
+				width: ();
+				height: 100%;
+				display: inline-block;
+				vertical-align: middle;
+			}
+			*/
+			/*方法7
+			.box7{
+				display: flex;
+				text-align: center;
+			}
+			.box7 span{
+				margin: auto;
+			}
+			*/
+			/*方法8
+			.box8{
+				display: -webkit-box;
+				-webkit-box-pack: center;
+				-webkit-box-align: center;
+				-webkit-box-orient: vertical;
+				text-align: center;
+			}
+			*/
+			/*方法9  实现不了效果
+			.floater{
+				height: 50%;
+				width: 100px;
+				margin: auto;
+				margin-bottom: -120px;
+			}
+			.content{
+				/*清除全部样式（清除浮动）
+				position: relative;
+				height: 240px;
+				margin: auto;
+			}
+			
+			.floater { 
+				float:left; 
+				height:50%; 
+				margin-bottom:-120px; 
+			} 
+			.content { 
+				clear:both; 
+				height:240px; 
+				position:relative; 
+			}
+			
+			*/
+			
+		</style>
+	</head>
+	<body>
+		
+		<!--20. css实现垂直居中?
+			（https://www.cnblogs.com/hutuzhu/p/4450850.html
+			方法1：table-cell(里面的内容 	垂直居中)
+			<div class="box1"><span>垂直居中</span></div>		-->
+			
+			
+			<!--方法2：display:flex	
+			<div class="box2"><span>lalall</span></div>		-->
+			
+			
+			<!--方法3：绝对定位和负边距,需要给父集定义宽高，里面的盒子垂直水平居中
+			<div class="box3"><span>llllaaalalla</span></div>		-->
+			
+			
+			<!--方法4：绝对定位和0	自适应宽高，不需要给父集设置宽高
+				这种方法和上面的有些类似，但是这里通过  margin：auto  和 top,
+				left,bottom,right都设置为0 实现居中。不过这里得确定内部元素的高度，
+				可以用百分比，比较适合移动端
+			<div class="box4"><span>biubiubuiu</span></div>		-->
+			
+			<!--方法5：translate		这实际是方法3的变形，移位是通过translate来实现的
+			<div class="box5"><span>akakaa</span></div>		-->
+			
+			<!--方法6：display:inline-block	通过after占位
+			<div class="box6"><span>wwwiwwwi</span></div>	-->
+			
+			<!--方法7：display:flex 和 margin:auto
+			<div class="box7"><span>nnnnnnn</span></div>	-->
+			
+			<!--方法8：display:-webkit-box 
+			<div class="box8"><span>qqqqqqq</span></div>	-->
+			
+			<!--方法9：display:-webkit-box
+				在content元素外 插入一个div。设置此div  height:50%;
+				margin-bottom:-contentheight;
+				content 清除浮动，并显示在中间
+				<div class="floater"></div> <div class="content"> Content here </div>
+			-->
+			<!--<div class="floater"></div>
+			<div class="content">content here</div>-->
+			
+		<script type="text/javascript">
+//			 var desen = {
+//			 	2 age:24,
+//			 	3 name:'xyf',
+//			 	4 job:'fontEnd',
+//			 	5 getName:function(){
+//			 		6 console.log(this.name); 7
+//			 	},
+//			 	8 setName:function(name){
+//			 		9 this.name = name; 10
+//			 	}
+//			 	11 }
+//			 
+//			 
+//			function Desen(age,name){
+//				this.age = age;
+//				this.name = 'name';
+//				this.getName=function(){
+//					console.log(this.name);
+//				}
+//				this.setName=function(name){
+//					this.name = name;
+//				}
+//			}
+
+
+
+//			var  a = [1,2,3]
+//			console.log(a)
+
+		</script>
+			
+		<!--
+		1. 简述你对面向对象编程的理解？
+		封装，继承，原型链
+		对象也是一个变量,但是对象可以包含多个值(多个变量)
+		https://www.cnblogs.com/enmeen/p/5711638.html
+		1.js是一门基于原型的面向对象语言
+		2.模拟类语言的面向对象方式
+		
+		
+		
+		
+		
+		
+		2. 现如今网站几乎没有不是动态的页面,这些交互式网页都用到同一种技术.
+		它的核心是通过后台与服务器进行少量的数据交换,可以是网页实现异步更新.
+		这意味着可以在不重新加载这个网页情况下,吃饭网页某部分进行更新.这种使用的技术叫什么?
+		(vue的mvvm	//https://www.jianshu.com/p/ea9d556d6529)
+		
+		
+		3. 在网站中与后台交互使用ajax请求,那么什么是ajax请求的基础(提示:XML??对象 IE6用的是ActiveX对象)
+		
+		
+		4. 在编写html文件是,总是习惯性的在代码之前添加Doctype?添加Doctype有什么作用?
+		HTML4.01规定了三种文档类型分别是什么?
+		添加Doctype 声明文档的根元素是 html
+		
+		
+		
+		5. HTML与XHTML二者有什么区别?
+			https://wenda.so.com/q/1459275198722948
+			1,所有标记必须有结束符
+			2,所有表情元素和属性名必须使用小写
+			3,所有xml标记必须合理嵌套
+			4，所有属性要用""括起来
+			5，把所有<和&特殊符号用编码表示
+			6，给所有属性赋一个值
+			7，不要在注释内容中使“--”
+			8,图片必须有说明文字
+			
+		
+		6. null和undefined的区别?
+			null是表示未存在的对象，常用来表示函数企图返回一个不存在的对象
+			undefined	当声明的变量还未被初始化时，变量的默认值为undefined
+		
+		7. js 中 会把那些情况下会(特殊 关键字) 识别成 false?
+		(false,0,null,undefined,"",NaN)
+		
+		
+		8. js 中 new 操作符具体干了什么?
+			例：var obj = new Base(); 
+			该步一共做了三件事：即 
+			   var obj  = {}; obj.__proto__ = Base.prototype; Base.call(obj);  
+			
+			第一行，我们创建了一个空对象obj
+			第二行，我们将这个空对象的__proto__成员指向了Base函数对象prototype成员对象
+			第三行，我们将Base函数对象的this指针替换成obj。
+
+		
+		9. 用JS代码定义个一个原型对象,这原型对象的定义了公共方法printInfo,
+		这个方法会输出"Hello World!".(提示使用 new操作符)
+		var a = {};
+		var a = new Object();
+		
+		
+		10. 在使用chrome浏览器中遇到跨域请求,该如何解决?(提示:安全)
+			http://www.xitongcheng.com/jiaocheng/dnrj_article_21032.html
+			https://www.jianshu.com/p/2db73311fcbe
+			关闭安全策略
+		
+		
+		11. 使用this构造函数(第一参数未知,第二个参数为name),判断提出第一个输入参数的类型并打印?
+		
+		
+		12. JS变量的作用域?(script是最大的js作用域，里面{}和var出来的都是作用域,let在{},{}就是作用域)
+			https://blog.csdn.net/vitalemon__/article/details/52438164
+			
+			
+			
+			var a, b;
+			(function () {
+			    console.log(a);// undefined
+			    console.log(b);// undefined
+			
+			    var a = b = 0;// (1)
+			
+			    console.log(a);// 0
+			    console.log(b);// 0
+			})();
+			
+			console.log('window', a);// window undefined
+			console.log('window', b);// window 0
+
+
+			
+			
+		
+		13. vuejs中常用路由跳转,它看起来就像将所用的内容放在一个页面上了,
+		只需要在一个 HTML 写好所需要的各个模板.这种把它叫做什么?
+		
+		
+		14. vuejs如何理解生命周期？
+		
+		
+		15. vuejs中如何监听 DOM 事件?
+		
+		
+		16. vuejs中如何动态绑定一个或多个特性，或一个组件 prop 到表达式?(提示:指令)
+		
+		
+		
+		17. 网页中要是使用弹性布局需要设置什么属性?
+		display:flex
+		div的display默认值是什么?
+		默认值是inline
+		所以div是一个什么元素?
+		是块级元素
+		
+		
+		18. 现在有一个div,想某元素之前插入'aaa'显示红色,某元素之后插入'bbb'显示蓝色,如何处理?
+		伪元素:(是内联元素)
+				1.  E:before	 ->   在元素的前面插入一个新的元素
+				2.  E:after      ->   在元素的后面插入一个新的元素
+				注意:一般使用定位方法来使用
+		
+		
+		19. css块级元素有那些?
+		(http://www.cnblogs.com/visi_zhangyang/archive/2011/10/25/2223704.html)
+		(div、h1~h6、hr、ul、ol、dl、table)
+		div - 常用块级容易，也是css layout的主要标签
+		address - 地址   
+		blockquote - 块引用   
+		center - 举中对齐块   
+		dir - 目录列表
+		fieldset - form控制组   
+		form - 交互表单
+		isindex - input prompt   
+		menu - 菜单列表   
+		noframes - frames可选内容，（对于不支持frame的浏览器显示此区块内容   
+		noscript - 可选脚本内容（对于不支持script的浏览器显示此内容）   
+		pre - 格式化文本   
+		table - 表格
+  
+		
+		20. css实现垂直居中?
+			（https://www.cnblogs.com/hutuzhu/p/4450850.html
+			1.margin:auto;
+			margin-top:50% - (自身高度一半);
+		
+		21. 简单描述同步和异步的区别?
+		同步：请求数据的时候，等待数据返回，并且同时还会执行其他代码
+		异步：一直等待数据返回，才会执行下面的代码，
+		
+		
+		
+		22. vw vh,和px的区别
+			https://www.cnblogs.com/aspwebchh/p/7675539.html
+			http://www.cnblogs.com/xiangxinhouse/p/7074757.html
+		vw:百分比宽度
+		vh：百分比高度
+		px：像素
+		
+		
+		
+			会话存储				本地存储
+		23. sessionStorage 和localStorage的区别
+			https://wenda.so.com/q/1512223908216872
+		localStorage 生命周期是永久。这意味着除非用户显示在浏览器提供的UI上清除localStorage信息，否则这些信息将永远存在
+		sessionStorage 生命周期为当前窗口或标签页，一旦窗口或标签页被永久关闭了，那么所通过sessionStorage存储的数据也被清空了
+		
+		
+		
+		
+		
+		-->
+		
+		<!--<script type="text/javascript">
+			24.编写一个方法，筛选生成新的返回值
+			var list = [
+				 {name:'tom',sex:'male',age:'30',address:'anywhere'},
+				 {name:'jerry',sex:'female',age:'19',address:'anywhere'},
+				 {name:'marry',sex:'female',age:'22',address:'anywhere'},
+				 {name:'bob',sex:'male',age:'11',address:'anywhere'},
+				 {name:'freedom',sex:'male',age:'16',address:'anywhere'},
+				 {name:'leedon',sex:'female',age:'33',address:'anywhere'},
+				 {name:'alex',sex:'male',age:'25',address:'anywhere'},
+				 {name:'alice',sex:'male',age:'78',address:'anywhere'},
+				 {name:'kathen',sex:'female',age:'90',address:'anywhere'}
+				]
+				// 只选取年龄小于25岁大于15岁的并且新要求的格式
+				{name:'xxx',sex:'xxxx',address："xxxx"}
+		</script>-->
+		
+		<!--<script type="text/javascript">
+			var list = [
+			 {name:'tom',sex:'male',age:'30',address:'anywhere'},
+			 {name:'jerry',sex:'female',age:'19',address:'anywhere'},
+			 {name:'marry',sex:'female',age:'22',address:'anywhere'},
+			 {name:'bob',sex:'male',age:'11',address:'anywhere'},
+			 {name:'freedom',sex:'male',age:'16',address:'anywhere'},
+			 {name:'leedon',sex:'female',age:'33',address:'anywhere'},
+			 {name:'alex',sex:'male',age:'25',address:'anywhere'},
+			 {name:'alice',sex:'male',age:'78',address:'anywhere'},
+			 {name:'kathen',sex:'female',age:'90',address:'anywhere'}
+			]
+			
+//			只选取年龄小于25岁大于15岁的并且新要求的格式
+			var array = [];
+			for(var i = 0; i < list.length; i++){
+				var l = list[i];
+//				console.log(l)
+				if(l.age<25 && l.age>15){
+					array.push(l)
+				}
+				
+			}
+//			console.log(array)//0:{name: "jerry", sex: "female", age: "19", address: "anywhere"}
+								//1:{name: "marry", sex: "female", age: "22", address: "anywhere"}
+								//2:{name: "freedom", sex: "male", age: "16", address: "anywhere"}
+//			console.log(array)
+			array = [
+				{name: "jerry", sex: "female", age: "19", address: "anywhere"},
+				{name: "marry", sex: "female", age: "22", address: "anywhere"},
+				{name: "freedom", sex: "male", age: "16", address: "anywhere"}
+				]
+			
+			for(var i = 0; i < array.length; i ++){
+				var u = array[i];
+//				console.log(u)
+				delete u.age
+				console.log(array)	//[
+			}						//{name: "jerry", sex: "female", address: "anywhere"},
+									//{name: "marry", sex: "female", address: "anywhere"},
+									//{name: "freedom", sex: "male",, address: "anywhere"}
+									//]
+			
+			
+		</script>-->
+		
+		<!--
+		<script type="text/javascript">
+//			25.编写一个方法排序,下列数据
+			var list = [
+				 {name:'tom',sex:'male',age:'30',address:'anywhere'},
+				 {name:'jerry',sex:'female',age:'19',address:'anywhere'},
+				 {name:'marry',sex:'female',age:'22',address:'anywhere'},
+				 {name:'bob',sex:'male',age:'11',address:'anywhere'},
+				 {name:'freedom',sex:'male',age:'16',address:'anywhere'},
+				 {name:'leedon',sex:'female',age:'33',address:'anywhere'},
+				 {name:'alex',sex:'male',age:'25',address:'anywhere'},
+				 {name:'alice',sex:'male',age:'78',address:'anywhere'},
+				 {name:'kathen',sex:'female',age:'90',address:'anywhere'}
+				]
+				//排序 年龄由小到大
+			
+				
+				//冒泡
+//			var i,j,temp;
+//			for ( i = 0; i < list.length-1; i++){
+////					console.log(list[i])//打印出每个对象
+//					for(j = i + 1; j < list.length; j++){
+//						if(list[i].age > list[j].age){
+//						temp = list[i].age;
+//						list[i].age = list[j].age;
+//						list[j].age = temp;
+//						}
+//					}
+//			}
+//			console.log(list)
+			
+			
+//			由大到小
+//			var i , j , temp;
+//				for( i = 0; i < list.length-1; i++){
+//					for( j = i+1; j < list.length; j++){
+//						if(list[i].age < list[j].age){
+//							temp = list[i].age;
+//							list[i].age = list[j].age;
+//							list[j].age = temp;
+//						}
+//					}
+//				}
+//				console.log(list)
+		
+		</script>
+		-->
+		
+		<!--
+		<script type="text/javascript">
+			26.将一个正整数分解质因数,例如：90 = 2 * 3 *3 *5 , 保存质因数
+				//每个合数都可以写成几个质数相乘的形式，其中每个质数都是这个合数的因数，叫做这个合数的分解质因数。
+				//分解质因数只针对合数
+				//质数又称素数。一个大于1的自然数，除了1和它自身外，不能整除其他自然数的数叫做质数；否则称为合数。
+		</script>
+		-->
+		
+		<!--
+        
+		<script type="text/javascript">
+//			27. 编写一个方法，下列数据
+			var list = [
+				 {name:'tom',sex:'male',age:'30',address:'anywhere'},
+				 {name:'jerry',sex:'female',age:'19',address:'anywhere'},
+				 {name:'marry',sex:'female',age:'22',address:'anywhere'},
+				 {name:'bob',sex:'male',age:'11',address:'anywhere'},
+				 {name:'freedom',sex:'male',age:'16',address:'anywhere'},
+				 {name:'leedon',sex:'female',age:'33',address:'anywhere'},
+				 {name:'alex',sex:'male',age:'25',address:'anywhere'},
+				 {name:'alice',sex:'male',age:'78',address:'anywhere'},
+				 {name:'kathen',sex:'female',age:'90',address:'anywhere'}
+				]
+				//删除 对象的 address 新增 job属性 值为 'anyjob'
+				
+				for(var i = 0 ; i < list.length; i++){
+					var a = list[i];
+//					console.log(a)//所有对象
+					delete a.address;
+					a.job = 'anyjob'
+				}
+				console.log(list)
+		</script>	
+        -->
+        
+        <script type="text/javascript">
+//      	28. 编写一个方法,排序一下数据
+//				foreach循环//https://wenda.so.com/q/1375655438063378?src=150
+//			var list = [
+//				{id:'1',class:'a',label:'ClassA',levelId:'-1'},
+//				{id:'12',class:'a',label:'ClassA',levelId:'-1'},
+//				{id:'7',class:'a',label:'ClassA',levelId:'-1'},
+//				{id:'2',class:'a',label:'ClassA',levelId:'12'},
+//				{id:'3',class:'a',label:'ClassA',levelId:'7'},
+//				{id:'10',class:'a',label:'ClassA',levelId:'7'},
+//				{id:'11',class:'a',label:'ClassA',levelId:'1'},
+//				{id:'88',class:'a',label:'ClassA',levelId:'1'},
+//				{id:'4',class:'a',label:'ClassA',levelId:'10'},
+//				{id:'6',class:'a',label:'ClassA',levelId:'2'},
+//				{id:'5',class:'a',label:'ClassA',levelId:'3'},
+//				{id:'8',class:'a',label:'ClassA',levelId:'11'},
+//				{id:'9',class:'a',label:'ClassA',levelId:'8'}
+//			];
+//
+//			function a (levelId){
+//				var all = [];
+//				for (var i = 0; i < list.length; i++){
+//					var li = list[i]
+//					if(levelId == li.levelId){
+//						li.children = li.id
+//						all.push(li)
+//					}
+//				}
+//				return all
+//			}
+//			console.log(a(-1))
+
+
+
+
+
+
+
+
+
+
+
+
+
+//			function a (levelId){
+//				var all = [];
+//				for(var i = 0; i < list.length; i++){
+//					var li = list[i]
+//					if(levelId == li.levelId){
+//						li.children = a(li.id)
+//						all.push(li)
+//					}
+//				}
+//				return all;
+//			}
+//			console.log(a(-1))
+			
+			
+			
+			
+			
+			
+			
+			
+
+
+/*
+			function a(levelId){
+				var all = [];
+				for(var i = 0; i < list.length; i++){
+					var dan = list[i];
+//					console.log(levelId)
+//					console.log(dan.levelId)
+					if(levelId == dan.levelId){
+						dan.children = a(dan.id)
+						all.push(dan)
+					}
+				}
+				return all
+			}
+			console.log(a(-1))
+			
+*/
+
+//			function test(levelId){
+//				//定义一个数组用来存储 数据levelId等于levelId
+//				var result = []
+//				
+//				for(var i = 0; i<list.length; i++){
+//					var item = list[i]
+//					if(item.levelId == levelId){
+//						//					1(不懂这个test()是回调函数
+//https://blog.csdn.net/liulina603/article/details/23757635)
+//						item.children = test(item.id)
+//						result.push(item)
+//					}
+//				}
+//				return result
+//			}
+//			console.log(test(-1))
+			
+			
+//			var all = [];
+//			for (var i= 0; i < list.length; i++){
+//				if(list[i].levelId==-1){
+//					console.log(list[i])
+//				}
+//			}
+
+			
+			
+			
+			
+			
+			
+//			[
+//				{
+//					id: 1, 
+//					name: '老板',
+//					levelId: 0,
+//					children: [
+//						{id: 2, name: '开发经理', levelId: 1,children: []},
+//						{id: 3, name: '设计经理', levelId: 1},
+//						{id: 4, name: '销售经理', levelId: 1},
+//						{id: 5, name: '实施经理', levelId: 1},
+//						{id: 6, name: '采购经理', levelId: 1},
+//					]
+//				}
+//			]
+			
+			
+//			var _fatherList = list.filter(function(item){
+//				return item.levelId == -1 
+//			})
+//			
+//			var _level1 = list.filter(function(item){
+//				return item.levelId == 1 
+//			})
+//			
+//			console.log(_fatherList)
+//			
+//			console.log(_level1)
+			
+			
+				// 预期得到如下格式数据
+				
+//				[
+//				 {
+//					id:'1',label:'ClassA',levelId:'-1',children:
+//														[{{id:'xx',label:'xxx',levelId:'1',children:
+//																							[{...}]}}]
+//				}
+//				]
+				
+				
+				
+				
+//				var arrs = [2 , [6,7,12,34,3] , [ 5,23,[1],9] ] ; 
+//				var arr = []; 
+//				function recursive(arrs) {
+//					for(var i = 0; i < arrs.length; i++){
+//						if(typeof arrs[i] === "number" ) {
+//							arr.push( arrs[i] ); 
+//						}else{
+//							recursive( arrs[i] ); 
+//						} 
+//					} 
+//				} 
+//				recursive(arrs); 
+//				console.log(arr);//[2, 6, 7, 12, 34, 3, 5, 23, 1, 9]
+
+				
+       </script>
+        
+        
+        
+        
+        <!--
+        <script type="text/javascript">
+//      	29. 用 js 获取 获取浏览器URL中查询字符串中的参数
+        	//测试地址:www.middol.cn/querysomething/index.html?id=1&name=test&sex=male
+			//预期格式
+			{id:'',name:'',sex:''}
+			
+        </script>
+        -->
+        
+        
+        
+        
+        <!--
+        <script type="text/javascript">
+//      	30. 编写一个方法 去掉一个数组的重复元素(用到indexOf()  )
+        	var arr = ["a","b","c","e","f","f","g","a","f","f","a","g","i","l","j"];
+        	var all = []; 
+        	
+        	//遍历数组,
+        	for (var i = 0; i < arr.length; i++){
+//      		console.log(arr[i])//打印出每一个元素，其中f出现4次
+//      		判断该元素在all里不存在才可以追加进去
+        		if(all.indexOf(arr[i])==-1){
+        			all.push(arr[i])
+        		}
+        	}
+			console.log(all)//["a", "b", "c", "e", "f", "g", "i", "l", "j"]
+        	
+//   		var student = ['qiang','ming','tao','li','liang','you','qiang','tao'];  	
+//      		var tmp = [];
+//      		// 遍历arr，把元素分别放入tmp数组(不存在才放) 
+//      		for( var i = 0; i < student.length; i++){
+//      			console.log(student[i])	
+//      			//该元素在tmp内部不存在才允许追加  
+//      			if(tmp.indexOf(student[i])==-1){
+//      				tmp.push(student[i])
+//      			}
+//      		}
+//      	console.log(tmp)// ["qiang", "ming", "tao", "li", "liang", "you"]
+        	
+        	
+        </script>
+       -->
+       <script type="text/javascript">
+//     		31. 编写方法
+//     		/*预期 输出
+//			========= 分割线==========
+//						*
+//					  * * *
+//					* * * * *
+//				  * * * * * * *
+//			========= 分割线==========
+//			for(var i = 1; i < 5; i++){
+//				for(var j = i; j > 0; j--){
+//					console.log(j)
+//					document.write("*")
+//				}
+//				document.write("<br/>")
+//			}
+			
+			
+			
+//			for(var i = 0; i < 5; i++){
+//				for(var j = 0; j < i *2 +1; j++){
+//					document.write("*")
+//				}
+//				document.write("<br/>")
+//			}
+			
+			
+
+
+
+       </script>
+       <script type="text/javascript">
+//     		32. 编写方法
+//				/*预期 输出
+//				========= 分割线==========
+//				* * * * *
+//				* * * *
+//				* * *
+//				* *
+//				*
+//				* *
+//				* * *
+//				* * * *
+//				* * * * *
+//				========= 分割线==========
+			
+       </script>
+       
+       <script type="text/javascript">
+//     	33. 编写方法
+//     	/*预期 输出
+//		========= 分割线==========
+//			  *
+//		   *	 *
+//		 * 		   *
+//		* * * * * * *
+//		========= 分割线==========
+//		*/
+       </script>
+       <script type="text/javascript">
+//     	34. 编写方法
+//     	/*预期 输出
+//			========= 分割线==========
+//				  *
+//				* * *
+//			  * * * * *
+//			* * * * * * *
+//			  * * * * *
+//				* * *
+//			      *
+//			========= 分割线==========
+//			*/
+       	
+       </script>
+       <script type="text/javascript">
+       	/*
+       	https://blog.csdn.net/vitalemon__/article/details/52438164
+       	var x = 'global';
+
+		function f1() {
+		    console.log(x);
+		    // 此函数被调用的时候，x在这里没有声明，所以会沿着作用域链开始寻找
+		    // 然而，Js的作用域是“静态”作用域，也就是说在声明函数的时候就可以确定而不必等到运行时
+		    // 所以，这里的作用域链为：f1-->window，所以输出window.x的值“global”
+		}
+		
+		function f2() {
+		    var x = 'f2';
+		
+		    // f2在函数内部调用f1
+		    f1();
+		    console.log(x)
+		}
+		
+		f1();   // global
+		f2();   // global（并非f2）
+ */
+       </script>
+       
+	</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>字符串-数组</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+	<style type="text/css">
+		
+	</style>
+</head>
+<body>
+	<p>1111111</p>
+	<p>2222222</p>
+	<p>3333333</p>
+	<p>4444444</p>
+	<p>5555555</p>
+    <script type="text/javascript">
+
+	/*
+	笔记：
+	---------------------------字符串---------------------------
+		charAt()				//返回指定位置的字符
+		charCodeAt()			//返回指定位置字符的Unicode编码
+		fromCharCode()			//根据Unicode编码创建一个字符串
+		toLocaleUpperCase()		//转换为大写
+		toLocaleLowerCase()		//转换为小写
+		indexOf()				//检索字符串，如果没有匹配到字符串则返回-1
+		subString()			提取指定索引号的字符串
+			
+			参数一：索引起始位置
+			参数二：索引结束位置
+			1：所有负数参数会被转换为0,
+			2：参数值的大小，会自动调整
+		slice()				提取指定索引号的字符串
+			
+			参数一：索引起始位置
+			参数二：索引结束位置
+			1、起始位置参数大于结束位置的参数，则返回空
+			2、当参数为负数则会先加字符串或者数组的长度变为正数，再按条件1进行提取，再进行提取字符串
+			3、数组或者字符串倒着数从“-1”开始
+
+
+		split()					将字符串分割为数组
+			参数一：用正则匹配
+			参数二：可选，设置分割数组的最大长度
+	-----------------------------数组---------------------------
+		pop()		删除并返回数组 最后一条数据				
+		shift()		删除并返回数组 第一条数据
+		unshift()	向数组第一个元素添加一条或者多条数据		返回新数组长度
+		push()		向数组最后一个元素添加一条或者多条数据		返回新数组长度
+
+		slice()		提取指定索引号的数组
+			
+			参数一：索引起始位置
+			参数二：索引结束位置
+			1、当起始位置大于结束位置，返回空
+			2、如果参数为负数，则会先加数组长度变为正数，再按条件1进行提取，在进行提取数组
+			3、数组或者字符串倒着数从“-1”开始
+		splice()	删除元素，并向数组中添加新元素返回被删除的元素		改变原数组
+			
+			参数一：规定添加/删除的起始位置，可使用负数，负数则会先加数组长度变为正数
+			参数二：要删除的项目数，如果<=0，则不会删除
+			参数三,四,五...：可选，向数组中添加的元素	
+	*/
+	
+
+    	let str="我是一头小毛驴";
+
+    	/*console.log(str.substring(1));		//从下标1到最末尾
+    	console.log(str.substring(2,2));		//为空,从下标2开始，至下标2结束，[2,2)，所以为空
+
+    	console.log(str.substring(-3,1));		//"我",负数按作0处理,substring()会将负的参数转换为0,注意，这个方法总会将较小的数作为起始，较大的数作为结束。
+
+    	*/  
+
+
+    	/*console.log(str.slice(1,3));			//"是一"，从下标1开始，至下标3结束，不包含下标3；[1,3)
+    	console.log(str.split(''));				//切分为数组
+
+    	console.log(str.charAt(1));				//"是"
+    	console.log(str[1]);					//"是"
+
+    	console.log(str.charCodeAt(2));			//19968
+
+    	console.log(String.fromCharCode(19968));	//"一"*/
+
+    	/*let wan="我爱你";
+    	let wanmiwen="";
+    	for (let i = 0,len=wan.length; i < len; i++) {
+    		wanmiwen += String.fromCharCode(wan.charCodeAt(i)+520);
+    	}
+    	console.log(wanmiwen);*/
+
+
+    	//console.log(str.slice(0,-3));			//空
+    	//console.log(str.slice(-5, -2));			//"一头小"，	可以倒着数，并且要满足先后顺序
+
+
+		/****************************************重点开始*************************************************/
+		/*
+		substring----提取字符串中两个指定的索引号之间的字符。
+		console.log(str.substring(3,-1));	//截取："我是一"，分析：将-1变为0，然后自动排列顺序：[0,3)则变为[0,1,2]
+
+		slice----提取字符串的片断，并在新的字符串中返回被提取的部分。
+		let c2=str.slice(-4);//截取：相当于c1.slice(7+(-4))
+		slice----从某个已有的数组返回选定的元素
+		console.log(str.slice(-5, -2));		//"一头小"，	可以倒着数，并且要满足先后顺序,  slice()第一个参数代表开始位置,第二个参数代表结束位置的下一个位置,  截取出来的字符串的长度为第二个参数与第一个参数之间的差;若参数值为负数,则将该值加上字符串长度后转为正值;   若第一个参数大于等于第二个参数,则返回空字符串.*/
+
+		/****************************************重点结束************************************************/
+
+		/*let arrs=[99,33,22,1,3,33,5,123,45,56];		//length=10
+
+		console.log(arrs.slice(-1,5));				//空数组
+		console.log(arrs.slice(-5,-2));				//等价于[5,8)则是[33,5,123]
+		console.log(arrs.slice(-2,-1));				//等价于[8,9),则是[45]，倒数第二个数字
+		console.log(arrs.slice(-1));				//最后一位数字*/
+
+		/*let str1="阿飞,朱雀,心艾,岚岚,丫丫,艾米";
+		console.log(str1.split(","));*/
+
+
+
+
+
+
+
+
+
+		let arrNum=[1,2,3,4,5,6,7,8,9];
+
+		//console.log(arrNum.push(999,888));			 //向数组末尾添加一个或多个元素，返回新数组长度
+		//console.log(arrNum.unshift(0,-1));			 //向数组开头添加一个或者多个元素，返回新数组的长度
+
+		//console.log(arrNum.shift());				//删除并返回 数组第一条数据
+		//console.log(arrNum.pop());					//删除并返回 数组最后一条数据
+		
+		
+		//console.log(arrNum.slice(1));			//[2, 3, 4, 5, 6, 7, 8, 9]，从下标1开始到最后一位结束,不改变原数组
+		//console.log(arrNum.slice(-100,-8));		//[-100,1)等价于[0,1)则结果为：[1];
+
+		//console.log(arrNum.splice(-1000,-3));
+
+		//console.log(arrNum);
+		let  aaaa="房价（价值，即房价：土地价格+建筑物价格，价格是太原12.2、天津"
+		//console.log(aaaa.replace(/价/g,"hahahahaha"));
+
+
+
+
+
+		/*
+		数组常用方法：
+			push
+			pop
+			shift
+			unshift
+			splice
+			sort 排序
+			reverse 翻转
+
+			forEach 		遍历数组，可以通过[].slice.call/apply/bind 遍历类数组
+			map 			返回所有数组，如果不满足条件的，返回undefined，最终数组长度和原数组一致
+			filter 			只返回满足条件的数组数据，最终数组长度和原数组不一致
+
+			concat 			不改变原数组
+			slice 			不改变原数组	
+			join  			不改变原数组，将数组转换为字符串
+
+			Array.isArrray	检测是否是数组
+
+			...  扩展运算符（ spread ）是三个点（...），将一个数组转为用逗号分隔的参数序列。
+
+	*/
+
+	let arr1=[11,33,44,55,66,22,3,4,5,6];
+	/*console.log(arr1.push(30));
+	console.log(arr1);*/
+
+	//console.log(arr1.slice(-2,-1));		//数组倒数第二位
+	//console.log(arr1.slice(-1));			//数组最后一位
+
+	//arr1.splice(1,1,"111");				//替换数组第二条数据
+	//arr1.splice(2,1,"wewqr");				//替换数组第三条数组		
+	//console.log(arr1);
+
+	//console.log(arr1.sort());				//排序只是按首位进行排序
+
+	/*console.log(arr1.sort(function(a,b) {	//从小到大排序
+		return a-b; 
+	}));*/	
+
+    //arr1.join("SB");
+    //console.log(arr1.join("SB"));
+
+    /*let a1=arr1.forEach( function(element, index, arr) {
+    	console.log(element);
+    	console.log(index);
+
+    	//return element;	无效
+    });*/
+
+    let a2=arr1.map(function(element, index, arr){
+    	return element;
+    })
+    //console.log(a2);
+
+    let a3=arr1.filter(function(element, index, arr){
+    	return element%2===0;
+    })
+    //console.log(a3);
+
+    let aP=document.getElementsByTagName("p"),
+    	len=aP.length;
+    //方法一：	
+    for (let i = 0; i < len; i++) {
+    	aP[i].onclick=function(){
+    		//console.log(i);
+    	}
+    }
+
+    //console.log([].slice.call(aP)); 		//[p, p, p, p, p]
+    //方法二：
+    [].slice.call(aP).forEach( function(element, index) {
+    	element.onclick=function(){
+    		//console.log(index);
+    	}
+    });
+
+    //console.log([...aP]);			//[p, p, p, p, p]
+    //方法三	
+    [...aP].forEach( function(element, index) {
+    	element.onclick=function(){
+    		//console.log(index);
+    	}
+    });
+
+
+    function fn1(a,b){
+    	console.log(arguments);
+    	alert(a+b);			//ha,he,10
+    }
+
+    //fn1`ha${10}he${20}`; //["ha", "he", "", raw: Array(3)]	[Array(3), 10, 20, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+
+    let arr2=[11,22,33];
+    let arr3=[66,77,88,99];
+
+    let arr4=[...arr2,...arr3];
+    //console.log(arr4);	//[11,22,33,66,77,88,99]
+
+    let [a,...b]=[1,2,3,4,5,6,7];
+    //console.log(a);		//1
+    //console.log(b);		//[2,3,4,5,6,7]
+
+    function fn2(a,b,c){
+    	console.log(a);
+    	console.log(b);
+    	console.log(c);
+    }
+    //fn2(..."123");		//将字符串解构为：1,2,3
+
+
+    function fn3(...ergouzi){
+    	console.log(ergouzi);
+    }
+
+    //fn3("123");		//123
+    //fn3(1,2,3);		//[1,2,3]
+
+    let arr5=[1,2,3,4];
+    //console.log(typeof arr5);   //object
+    
+    function fn4(param){
+    	console.log(param);
+    }
+   
+    function fn5(a,b,c,d){
+        console.log(a);
+        console.log(b);
+        console.log(c);
+        console.log(d);
+    }
+    //fn5(...arr5);   //1 2 3 4
+
+    //let arr6=new Array(100).fill(1);
+    //console.log(arr6);
+
+    function fn1 ({a=99,b=a}) {
+    		console.log(a);
+    		console.log(b); 
+	};
+
+	//fn1({});
+	//fn1({a:88,b:99});
+	//fn1({a:88});
+
+	function fn2({a,b=a}={a:99,b:88}){
+		console.log(a);
+		console.log(b); 
+	}
+	//fn2();
+	//fn2({a:888});
+	//fn2({a:999,b:888});
+
+    //对小数进行取整
+    function fn3(num){
+        return (num+"").split(".")[0]-0;
+    }
+    //console.log(fn3(5.999));
+
+   
+    let obj1={
+    	name:"zhangsan",
+    	age:88,
+    	handsome:true
+    }
+    //遍历对象
+    for (let key in obj1) {
+    	//console.log(obj1[key]);
+    }
+    //修改对象属性
+    obj1.age=99;
+    //新增对象属性
+    obj1.sex="男";
+    //删除对象属性
+    delete obj1.age;
+    //判断对象是否存在某个属性
+    let shifoucunzai="sex" in obj1;
+    //console.log(shifoucunzai);	//true或者false
+
+    //json 是一个格式非常标准的长得像对象的字符串，JSON序列化和反序列化
+    let json1={
+    	name:"zhangsan",
+    	age:88,
+    	handsome:true
+    }
+    //反序列化：将JSON对象转为字符串
+    let fanxuliehua=JSON.stringify(json1);
+    //console.log(fanxuliehua);	//{"name":"zhangsan","age":88,"handsome":true}---字符串
+    let json2='{"name":"zhangsan","age":88,"handsome":true}'
+    //序列化：将JSON格式字符串转为JSON对象
+    let xuliehua=JSON.parse(json2);
+    //console.log(xuliehua);	//{name: "zhangsan", age: 88, handsome: true}---对象
+
+    //ES6 箭头函数  ()=>  箭头函数一般用在回调函数中
+    //1.箭头函数没有自己的this, 它的this是继承而来; 默认指向在定义它时所处的对象(宿主对象),而不是执行时的对象, 定义它的时候,可能环境是window; 箭头函数可以方便地让我们在 setTimeout ,setInterval中方便的使用this;
+	//2.箭头函数中，this指向的固定化，并不是因为箭头函数内部有绑定this的机制，实际原因是箭头函数根本没有自己的this，导致内部的this就是外层代码块的this;
+    let jiantou=v=>v;
+    //console.log(jiantou(10));
+    let add=(a,b)=>a+b;
+    //console.log(add(99,99));
+    let fn=(a,b,c)=>{
+    	console.log(a);
+    	console.log(b);
+    	console.log(c);
+    	return a+b+c;
+    }
+    console.log(fn(1,2,3));
+    
+    </script>
+</body>
+</html>

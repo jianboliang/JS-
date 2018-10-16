@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>ES602-笔记(变量解构赋值)</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+	<style type="text/css">
+		
+	</style>
+</head>
+<body>
+    <script type="text/javascript">
+    	/*ES6中按照一定模式，从数组和对象中提取值对变量进行赋值，被称为：解构(Destructuring)
+
+    	解构赋值时，只要等号右边的值不是对象或者数组，就会先将他转换为对象。如果右边无法被转换为对象，就会报错
+
+
+    	-------------------------------数组解构赋值(通过下标排列)-------------------------------
+    		比如：ES6中提取数组中的值进行赋值：let[a,b,c]=[10,20,30];
+			解构不成功：变量的值就会是undefined;
+			不完全解构：等号左边部分只匹配等号右边部分数组，这种情况依然可以解构成功;
+			如果等号左边是数组，等号右边是不可遍历的结构将会报错;如:let[foo]=1/false/NaN/undefined/null/{};
+			解构赋值：允许指定默认值;1、如果默认值是一个表达式,那么这个表达式是惰性求值的,即只有在用到的时候,才会求值。2、默认值可以引用解构赋值的其他变量，但该变量必须已经声明了的。
+		---------------------------对象解构赋值(通过变量名称和属性名称一致)---------------------------
+			对象的解构与数组有一个重要的不同。数组的元素是按次序排列的，变量的取值由它的位置决定；而对象的属性没有次序，变量名必须与属性名同名，才能取到正确的值。
+		---------------------------字符串解构赋值---------------------------
+			字符串也可以解构赋值，字符串会被转换成类似数组的对象；
+			类似数组对象也有length属性，因此这个属性也可以解构赋值，如：let {length:len}="hello";
+		---------------------------数值、布尔值解构赋值-------------------------
+			解构赋值时候，如果等号右边是数值或者布尔值时候，需要先转换为对象；如：let {toString:ts}=123;
+		---------------------------对象解构赋值---------------------------
+    	*/
+
+    	/*
+    	let [a1,[a2,[a3]]]=[1,[2,[3]]];
+    	console.log(a1+" , "+a2+" , "+a3);	//1,2,3
+    	
+    	let [,,z]=[11,22,33];
+    	console.log(z);		//33
+		let [x,...y]=[1,2,3]
+		console.log(x);		//1;
+		console.log(y);		//[2, 3]
+
+		let [x,y]=[{ha:"哈哈"},{erwa:"二狗子"}];
+		console.log(x);
+		console.log(y);
+
+		*/
+
+		
+
+		/*let [a,b,...z]=["ha"];
+		console.log(a);		//ha
+		console.log(b);		//undefined  解构不成功
+		console.log(z);		//[]
+
+		let[foo]=[];
+		console.log(foo);	//undefined
+
+		let[bar,fo]=["bar"];
+		console.log(bar);		//bar
+		console.log(fo);		//undefined  解构不成功
+		
+		let [a,b]=[1,2,3];	//不完全解构
+		console.log(b);
+		*/
+		//let [foo] = 1;
+		//let [foo] = false;
+		//let [foo] = NaN;
+		//let [foo] = undefined;
+		//let [foo] = null;
+		//let [foo] = {};
+		
+		/*
+		let [a,b=2]=[11,22];
+		console.log(a);	//11
+		console.log(b);	//22
+		let [a,b=2]=[11,undefined];
+		console.log(a);	//11
+		console.log(b);	//2
+		
+		let [a,b=2]=[11];
+		console.log(a);	//11
+		console.log(b);	//2
+
+		let [a=1]=[null];
+		console.log(a);	//null
+		*/
+
+		/*function f(){console.log('aaa');};
+		let [x=f()] = [11];
+		console.log(x);	//11
+		等价于：
+		let x;
+		if([1][0]===undefined){
+			x=f();
+		}else{
+			f=[1][0];
+		}*/
+		
+		/*
+		解构默认赋值——表达式
+		function f(){console.log('aaa');};
+		let [x=f()] = [null];
+		console.log(x);	//null;
+		
+		function f(){console.log('aaa');};
+		let [x=f()] = [undefined];
+		console.log(x);	//aaa;
+
+		解构默认赋值——引用解构赋值的其他变量
+		let[x=1,y=x]=[undefined/空];
+		console.log(x);	//1
+		console.log(y);	//1
+		
+		let[x=1,y=x]=[2];
+		console.log(x);	//2
+		console.log(y);	//2
+
+		let[x=1,y=x]=[1,2];
+		console.log(x);	//1
+		console.log(y);	//2
+		*/
+		/*-----------------对象解构赋值-----------------
+		let{x,y,z}={x:"name",y:"ergouzi"};
+		console.log(x);
+		console.log(y);
+		let{x,y,z}={x:"name",y:"ergouzi"};
+		console.log(x);	//name
+		console.log(y);	//ergouzi
+		console.log(z);	//undefined
+
+		//如果变量名和属性名不一致，必须按如下方式
+		let{foo:aa}={foo:"name",boo:"ergouzi"};
+		console.log(aa);	//name
+		let obj={foo:"name",boo:"ergouzi"};
+		let {foo:f,boo:b}=obj;
+		console.log(f);
+		console.log(b);
+		//说白了：对象解构是按如下方式简写的;foo是匹配模式
+		let{foo:foo,boo:boo}={foo:"name",boo:"ergouzi"};
+		console.log(foo);console.log(boo);
+		//对象解构的内部机制：首先找到同名属性，在赋值对应变量，真正被赋值的是后者，而不是前者；前者匹配的模式，后者变量。
+
+		//对象解构的嵌套赋值例子
+		let person={};
+		let arr=[];
+		({foo:person.name,bar:arr[0]}={foo:"张三",bar:11});
+		console.log(person.name);	//张三
+		console.log(arr[0]);	//11
+		
+		//对象解构设置默认值
+		let {foo,boo="18岁"}={foo:"王二狗"};
+		console.log(foo+","+boo);	//王二狗,18岁
+
+		let {x:y=11}={x:999};
+		console.log(y);		//999
+
+		let {x:x=3}={x:undefined};
+		console.log(x);	//3
+
+		let {b}={b:undefined};
+		console.log(b);	//undefined
+		
+		let {foo}={bar:'bar'};
+		console.log(foo);	//undefined
+		
+		//let {obj:{bar}}={baz:'baz'};//Cannot destructure property `bar` of 'undefined' or 'null'.
+		//左边对象的属性obj，对应是一个子对象，该子对象有一个属性bar。针对上面分析：obj为undefined，再取他的子属性就要报错;
+		第一步：先将等号左边对象的obj属性去匹配右侧对象的obj属性，没有匹配成功就为undefined，
+		第二步：再取左侧obj属性对应的子属性，就报错了
+
+		
+		let {obj:{bar}}={obj:{bar:'bar'}};
+		console.log(bar);	//bar
+
+		//如果要将一个已经声明的变量用于解构赋值，必须非常小心。
+		let person;
+		//{person} = {person:"张三"};	//Unexpected token =
+		//报错原因：JS引擎将{person}解析为一个代码块，从而发生语法错误，只要不将{person}放在行首，课避免JS将其解析为代码块，即可解决该问题。
+		({person}={person:"张三"});
+		console.log(person);	//张三
+		
+		//由于数组本质是特殊的对象，因为可以对数组进行对象属性的解构；
+		let arr=[1, 2, 3];
+		let {0:first, [arr.length-1]:last}=arr;
+		console.log(first);		//1
+		console.log(last);		//3
+
+		let {prop: x}=undefined;	//报错
+		let {prop: y}=null;			//报错
+		以上报错原因：解构赋值规则，如果等号右边不是数组或者对象，首先会转换为数组或者对象，如果无法转换就会报错。由于undefined和null都无法转换为对象所以报错。
+		*/
+		
+		/*-----------------字符串解构赋值-----------------
+		let [a,b,c,d]="hello";
+		console.log(a);		//h
+		console.log(b);		//e
+		let {length:len}="hello";
+		console.log(len);*/
+		/*-----------------数值布尔值解构赋值-----------------
+		let {toString:ts}=123;
+		console.log(ts===Number.prototype.toString);	//true
+
+		let {toString:bool}=true;
+		console.log(bool===Boolean.prototype.toString);	//true
+
+		*/
+		/*-----------------函数参数解构赋值-----------------*/
+
+		/*function add ([x,y]) {
+			console.log(x+y);
+		}
+		add([99,1]);		//100*/
+
+		//分析一波：函数add的参数表面是一个数组，但是在传入参数那一刻开始，[x,y]就会解构为变量x和y。对于函数内部实现而言，此时感受是参数x和y。
+
+		
+		//console.log([[98,1],[88,1]].map(([a,b]) => a+b));	//[99,89]
+
+		//console.log([[98,1],[88,1]].map((a,b) => a+b));	//["98,10","88,11"]  
+
+		/*分析一波：[[98,1],[88,1]].map((a,b) => a+b)，a是二维数组中的子数组，b是下标，调用map方法时候变成了，子数组和下标的字符串拼接
+		  第一个子数组：[98,1]+下标0，则转换为字符串："98,10"；
+		  第二个子数组：[88,1]+下标1，则转换为字符串："88,11"；
+		*/
+
+		
+
+	
+
+    </script>
+</body>
+</html>

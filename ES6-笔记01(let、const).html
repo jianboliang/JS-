@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>ES601-笔记(let、const)</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+	<style type="text/css">
+		
+	</style>
+</head>
+<body>
+    <script type="text/javascript">
+    	/*
+    	声明变量：
+    		let：只在本代码块中有效，for循环计数器，适合使用let
+			在ES5中的var存在变量提升，如果是var声明的变量没有赋值，则变量提升输出结果为undefined;
+			但是在ES6中let不存在变量提升，所有let声明的变量必须是在声明后才能使用，更符合一般逻辑;
+		暂时性死区：let、const
+			在ES6中规定：如果区块中存在let、const命令，这个区块这个这些命令声明的变量，从一开始形成了封闭的作用域。凡在这些变量声明前使用这些变量，就会报错。
+			总之：在代码块内，使用let、const声明变量之前，该变量是不可用的，语法上称为："暂时性死区"(temporal dead zone，简称 TDZ);    比如：let x=x,会报错，因为从右向左执行，存在暂时性死区;
+		let不允许在同一个作用域内，重复声明同一个变量
+		ES5：只有全局作用域和函数作用域，没有块级作用域。导致不合理场景;
+				比如：1、内层变量可能会覆盖外层变量。
+					  2、用来计数的循环变量会泄露为全局变量(for循环的(var i=0)执行完后泄露为全局变量)	
+		ES6：let为JavaScript新增了块级作用域{}
+		ES5规定：函数只能在顶层作用域和函数内部定义，不能再块级作用域中声明。 
+				 在ES6中可以在{}中声明函数，考虑到环境因素导致行为差异性过大，一般不在块级作用域中声明函数
+		
+		const：声名一个只读的常量，不可重复声明，存在"暂时性死区";
+		
+    	*/
+
+    	/*let a=[];
+    	for (let i = 0; i < 10; i++) {
+    		a[i]=function(){
+    			console.log(i);
+    		}
+    	}
+    	a[5]();		//5
+    	解析：let声明的变量i只能在本次循环的代码块中有效，则每次操作的都是独立的变量i
+				第一次循环：for (let i = 0; i < 10; i++) 
+				{a[0]=function(){console.log(0);}}，此时i是本次循环的值只在{}中生效;
+				第二次循环：for (let i = 1; i < 10; i++) {a[1]=function(){console.log(1);}}，此时i是本次循环的值只在{}中生效;
+				...
+
+    	var b=[];
+    	for (var i = 0; i < 10; i++) {
+    		b[i]=function(){
+    			console.log(i);
+    		}
+    	}
+    	b[5]();		//10
+		解析：var声明的变量i在全局中生效，则操作的是同一个全局变量i
+				第一次循环：for (var i = 0; i < 10; i++) 
+				{a[0]=function(){console.log(0);}}，此时全局i的值是0;
+				第二次循环：for (var i = 1; i < 10; i++) {a[1]=function(){console.log(1);}}，此时全局i的值是0;
+				...
+				最后一次循环：for (var i = 1; i < 10; i++) {a[length-1]=function(){console.log(length-1);}}，此时全局i的值是最后一次循环的值;
+				在循环执行完后，数组b的成员i都是指向同一个i，导致输出是最后一次循环的i值;
+
+
+
+    	*/
+
+    	/*var tmp=new Date();
+    	function f () {
+    		console.log(tmp)
+    		if(false){
+    			var tmp="hello";
+    		}
+    	}
+    	f();分析一波：变量提升：tmp=undefined; function f()...
+    					代码执行: tmp=new Date()
+    							  f();分析二波：变量提升：tmp=undefined;	 
+												代码执行：tmp=undefined;
+														  tmp="hello";*/
+    	
+ 
+    	
+    </script>
+</body>
+</html>

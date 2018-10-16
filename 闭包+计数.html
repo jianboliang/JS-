@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+	<style type="text/css">
+		
+	</style>
+</head>
+<body>
+	<div id="box">
+		<h><span>您点击了: </span><span>0</span> 次</h><br/><br/>
+		<button>点击一下</button>
+	</div>
+    <script type="text/javascript">
+    	
+
+    	(function(){
+    		let textNum=document.getElementsByTagName("span")[1],
+    			btn=document.getElementsByTagName("button")[0],
+    			num=0;
+    		btn.onclick=function(){
+    			num++;
+    			textNum.innerHTML=num;
+    		}
+    	}())
+    </script>
+</body>
+</html>
